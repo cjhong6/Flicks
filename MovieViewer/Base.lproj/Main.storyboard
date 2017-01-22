@@ -21,36 +21,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HKq-v1-Uew">
-                                <rect key="frame" x="0.0" y="64" width="414" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.40489377880890676" blue="0.46773566185387017" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Network Error">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="networkErrorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XoK-wG-4ic"/>
-                                </connections>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dBB-vT-pOb">
-                                <rect key="frame" x="0.0" y="94" width="414" height="642"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="P6T-Mm-8UM">
-                                    <size key="itemSize" width="200" height="250"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="P6T-Mm-8UM">
+                                    <size key="itemSize" width="200" height="281"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCell" id="oKD-6H-C29" customClass="MoviieCollectionViewCell" customModule="MovieViewer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="281"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="281"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O0F-aT-fAE">
-                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="281"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -61,23 +50,30 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7DZ-tY-PLo">
+                                <rect key="frame" x="0.0" y="64" width="414" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.38152128579923594" blue="0.16892663716547252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Network Error"/>
+                                <connections>
+                                    <action selector="networkErrorBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6hm-pH-GBg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="eFP-e2-all" firstAttribute="top" secondItem="dBB-vT-pOb" secondAttribute="bottom" id="1FU-0w-aAD"/>
-                            <constraint firstAttribute="trailing" secondItem="HKq-v1-Uew" secondAttribute="trailing" id="Cwz-NV-Hd6"/>
-                            <constraint firstItem="dBB-vT-pOb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="MAb-BK-4Sp"/>
-                            <constraint firstItem="HKq-v1-Uew" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="64" id="aDu-Oa-vTU"/>
-                            <constraint firstAttribute="trailing" secondItem="dBB-vT-pOb" secondAttribute="trailing" id="c1t-6A-biS"/>
-                            <constraint firstItem="dBB-vT-pOb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cJf-Kb-WiU"/>
-                            <constraint firstItem="HKq-v1-Uew" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="rGu-2x-RkK"/>
-                            <constraint firstItem="dBB-vT-pOb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="47" id="zp9-gD-dqw"/>
+                            <constraint firstAttribute="trailing" secondItem="7DZ-tY-PLo" secondAttribute="trailing" id="1XM-uU-ARA"/>
+                            <constraint firstItem="7DZ-tY-PLo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3qm-N6-aak"/>
+                            <constraint firstItem="7DZ-tY-PLo" firstAttribute="top" secondItem="OTz-Mn-G6w" secondAttribute="bottom" id="71D-YN-wLG"/>
+                            <constraint firstItem="dBB-vT-pOb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="8An-ea-4xV"/>
+                            <constraint firstItem="eFP-e2-all" firstAttribute="top" secondItem="dBB-vT-pOb" secondAttribute="bottom" id="Evm-hu-f4L"/>
+                            <constraint firstAttribute="trailing" secondItem="dBB-vT-pOb" secondAttribute="trailing" id="Mqr-4a-W3C"/>
+                            <constraint firstItem="dBB-vT-pOb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="haY-q2-d6o"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Flick" id="FI6-pv-Ved"/>
                     <connections>
                         <outlet property="collectionView" destination="dBB-vT-pOb" id="tdg-du-APe"/>
-                        <outlet property="networkErrorButton" destination="HKq-v1-Uew" id="2i4-Fv-BVq"/>
+                        <outlet property="networkErrorButton" destination="7DZ-tY-PLo" id="3Es-d1-KOO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
