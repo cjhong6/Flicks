@@ -10,13 +10,15 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class MoviesViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
+class MoviesViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate {
 
 
     @IBOutlet weak var networkErrorButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
-    var movies : [NSDictionary]?
+    var movies : [NSDictionary]? //actual data
+    var filterMovies: [NSDictionary]? //represent rows of data that match our search text.
     var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
@@ -24,6 +26,7 @@ class MoviesViewController: UIViewController,UICollectionViewDelegate,UICollecti
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        searchBar.delegate = self
         
         networkErrorButton.isHidden = true
         
@@ -32,7 +35,6 @@ class MoviesViewController: UIViewController,UICollectionViewDelegate,UICollecti
         refreshControl.addTarget(self, action: #selector(MoviesViewController.refreshControlAction(sender:)), for: UIControlEvents.valueChanged)
         // add refresh control to table view
         collectionView.insertSubview(refreshControl, at: 0)
-        
         
         //make API call
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
@@ -52,8 +54,9 @@ class MoviesViewController: UIViewController,UICollectionViewDelegate,UICollecti
             
             if let data = data {
                 if let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
-                    print(dataDictionary)
+                    //print(dataDictionary)
                     self.movies = dataDictionary["results"] as? [NSDictionary]
+                    self.filterMovies = self.movies
                     //Tableview is always get done before the network connection!!!!!
                     //MUST reload the tableview again after the network has been made
                     self.collectionView.reloadData()
@@ -73,7 +76,8 @@ class MoviesViewController: UIViewController,UICollectionViewDelegate,UICollecti
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        if let movies = movies{
+        
+        if let movies = filterMovies{
             return movies.count
         }else{
             return 0
@@ -81,11 +85,11 @@ class MoviesViewController: UIViewController,UICollectionViewDelegate,UICollecti
     
     }
     
-
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MoviieCollectionViewCell //Downcast into MovieCell class object
 
-        let movie = movies![indexPath.row] //get single movie
+        let movie = filterMovies![indexPath.row] //get single movie
+
         //let title = movie["title"] as! String
         //let overview = movie["overview"] as! String
         let baseURL = "http://image.tmdb.org/t/p/w500"
@@ -94,7 +98,7 @@ class MoviesViewController: UIViewController,UICollectionViewDelegate,UICollecti
         cell.posterView.setImageWith(imageURL as! URL)
         //cell.titleLabel.text = title
         //cell.overviewLabel.text = overview
-        print ("row \(indexPath.row)")
+        //print ("row \(indexPath.row)")
         return cell
     }
     
@@ -113,7 +117,6 @@ class MoviesViewController: UIViewController,UICollectionViewDelegate,UICollecti
             // ... Use the new data to update the data source ...
             if let data = data {
                 if let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
-                    print(dataDictionary)
                     self.movies = dataDictionary["results"] as? [NSDictionary]
                     // Reload the tableView now that there is new data
                     self.collectionView.reloadData()
@@ -126,6 +129,7 @@ class MoviesViewController: UIViewController,UICollectionViewDelegate,UICollecti
         task.resume()
     }
     
+    //click the network error button to retrieve data
     @IBAction func networkErrorBtnAction(_ sender: Any) {
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")!
@@ -158,5 +162,37 @@ class MoviesViewController: UIViewController,UICollectionViewDelegate,UICollecti
         }
         task.resume()
     }
-
+    
+    /*show Cancel button when user taps on search bar
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    //taps on cancel button: hide the Cancel button, clear existing text in search bar and hide the
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+    }
+    */
+  
+    //When the search text changes we update filteredMovies and reload our table.
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // When there is no text, filterMovies is the same as the original movies
+        // When user has entered text into the search box
+        // Use the filter method to iterate over all movie in the movies array
+        // For each movie, return true if the movie should be included and false if the
+        // movie should NOT be included
+        filterMovies = searchText.isEmpty ? movies : movies?.filter({(movie: NSDictionary) -> Bool in
+            // If movie matches the searchText, return true to include it
+            return (movie["title"] as! String).range(of: searchText, options: .caseInsensitive) != nil
+        })
+        collectionView.reloadData()
+    }
+    
+    //tap the view to dismiss keyboard
+    @IBAction func onTap(_ sender: Any) {
+        view.endEditing(true)
+    }
+  
 }

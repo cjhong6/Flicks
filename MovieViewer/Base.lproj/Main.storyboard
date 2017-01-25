@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dBB-vT-pOb">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="692"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="P6T-Mm-8UM">
                                     <size key="itemSize" width="200" height="281"/>
@@ -50,8 +50,13 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qKu-Fo-uxc">
+                                <rect key="frame" x="0.0" y="64" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7DZ-tY-PLo">
-                                <rect key="frame" x="0.0" y="64" width="414" height="30"/>
+                                <rect key="frame" x="0.0" y="108" width="414" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.38152128579923594" blue="0.16892663716547252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Network Error"/>
                                 <connections>
@@ -60,23 +65,33 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="7DZ-tY-PLo" secondAttribute="trailing" id="1XM-uU-ARA"/>
                             <constraint firstItem="7DZ-tY-PLo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3qm-N6-aak"/>
-                            <constraint firstItem="7DZ-tY-PLo" firstAttribute="top" secondItem="OTz-Mn-G6w" secondAttribute="bottom" id="71D-YN-wLG"/>
-                            <constraint firstItem="dBB-vT-pOb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="8An-ea-4xV"/>
+                            <constraint firstItem="7DZ-tY-PLo" firstAttribute="top" secondItem="OTz-Mn-G6w" secondAttribute="bottom" constant="44" id="71D-YN-wLG"/>
+                            <constraint firstItem="dBB-vT-pOb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="44" id="8An-ea-4xV"/>
                             <constraint firstItem="eFP-e2-all" firstAttribute="top" secondItem="dBB-vT-pOb" secondAttribute="bottom" id="Evm-hu-f4L"/>
                             <constraint firstAttribute="trailing" secondItem="dBB-vT-pOb" secondAttribute="trailing" id="Mqr-4a-W3C"/>
                             <constraint firstItem="dBB-vT-pOb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="haY-q2-d6o"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="nvK-Yz-ehY" appends="YES" id="dvR-Ei-mfY"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Flick" id="FI6-pv-Ved"/>
                     <connections>
                         <outlet property="collectionView" destination="dBB-vT-pOb" id="tdg-du-APe"/>
                         <outlet property="networkErrorButton" destination="7DZ-tY-PLo" id="3Es-d1-KOO"/>
+                        <outlet property="searchBar" destination="qKu-Fo-uxc" id="aqt-ex-Ofk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="nvK-Yz-ehY">
+                    <connections>
+                        <action selector="onTap:" destination="BYZ-38-t0r" id="9Fb-jZ-V3I"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1299" y="128"/>
         </scene>
